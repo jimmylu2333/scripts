@@ -1,14 +1,29 @@
 #!/bin/bash
-
-# 请将192.168.11修改为你ip对应的网络位即可.
-
+echo -e "1: 192.168.1\n2: 192.168.0\n3: 10.0.0\n4: 10.0.1"
+read -p "input hosts field or number( example 192.168.1 ,do not need a dot behind):" j
+case "$j" in 
+    1)
+        j='192.168.1'
+        ;;
+    2)
+        j='192.168.0'
+        ;;
+    3)
+        j='10.0.0'
+        ;;
+    4)
+        j='10.0.1'
+        ;;
+    *)
+        break
+        ;;
+esac
 for i in {1..255}
 do
 (
-ping -c2 -t 2 192.168.11.$i > /dev/null 2>&1 
-# 修改👆的 ip 地址为你 ip 地址的网络段.主机位即 $i 不变.
+ping -c2 -t 2 ${j}.$i > /dev/null 2>&1 
 if [ $? -eq 0 ];then
-echo "192.168.11.$i is up"
+    echo "${j}.$i is up"
 exit 0 
 else 
 exit 0 
